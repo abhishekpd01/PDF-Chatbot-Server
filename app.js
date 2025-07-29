@@ -4,8 +4,13 @@ import cors from 'cors';
 import fileRouter from './routes/file.routes.js';
 import vectordbRouter from './routes/vectordb.routes.js';
 import chatRouter from './routes/chat.routes.js';
+import fs from 'fs';
 
 const app = express();
+
+if (!fs.existsSync('./uploads')) {
+  fs.mkdirSync('./uploads', { recursive: true });
+}
 
 app.use(cors({ origin: true }));
 app.use(express.json());
