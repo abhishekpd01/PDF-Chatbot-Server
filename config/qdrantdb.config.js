@@ -2,6 +2,7 @@
 import 'dotenv/config';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { writeFileSync } from 'fs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -10,7 +11,7 @@ const __dirname = path.dirname(__filename);
 if (process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON) {
   // Write the JSON content to a temporary file
   const credentialsPath = path.resolve(__dirname, 'temp-credentials.json');
-  require('fs').writeFileSync(credentialsPath, process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON);
+  writeFileSync(credentialsPath, process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON);
   process.env.GOOGLE_APPLICATION_CREDENTIALS = credentialsPath;
 } else {
   // For local development, keep the file path
